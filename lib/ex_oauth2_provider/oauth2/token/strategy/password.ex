@@ -51,8 +51,8 @@ defmodule ExOauth2Provider.Token.Password do
       {:ok, resource_owner} ->
         {:ok, Map.put(params, :resource_owner, resource_owner)}
 
-      {:error, reason} ->
-        {:error, Map.merge(params, %{error: :unauthorized, error_description: reason, error_http_status: :unauthorized})}
+      {:error, error} ->
+        {:error, Map.merge(params, %{error: error, error_description: error, error_http_status: :unauthorized})}
     end
   end
   defp load_resource_owner({:ok, params}), do: Error.add_error({:ok, params}, Error.invalid_request())
